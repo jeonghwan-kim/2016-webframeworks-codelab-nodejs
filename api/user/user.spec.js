@@ -2,8 +2,20 @@ const assert = require('assert');
 const request = require('supertest');
 const should = require('should');
 const app = require('../../app');
+const syncDatabase = require('../../bin/sync-database');
+const models = require('../../models');
 
 describe('GET /users', () => {
+  const users = [{name: 'chris'},{name: 'bek'},{name: 'tim'}]
+
+  before('sync database', (done) => {
+    syncDatabase().then(() => done());
+  });
+
+  before('inset seed user data', (done) => {
+    models.User.bulkCreate(users).then(() => done());
+  })
+
   it('should return 200 status code', (done) => {
     request(app)
         .get('/users')
@@ -29,6 +41,16 @@ describe('GET /users', () => {
 });
 
 describe('GET /users/:id', () => {
+  const users = [{name: 'chris'},{name: 'bek'},{name: 'tim'}]
+
+  before('sync database', (done) => {
+    syncDatabase().then(() => done());
+  });
+
+  before('inset seed user data', (done) => {
+    models.User.bulkCreate(users).then(() => done());
+  })
+
   it('should return 200 status code', (done) => {
     request(app)
         .get('/users/1')
@@ -63,6 +85,10 @@ describe('GET /users/:id', () => {
 });
 
 describe('POST /users', () => {
+  before('sync database', (done) => {
+    syncDatabase().then(() => done());
+  });
+
   it('should return 201 status code', (done) => {
     request(app)
         .post('/users')
