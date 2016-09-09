@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app"
+    "start": "node app",
+    "test": "node_modules/.bin/mocha api/user/user.spec.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.0.2",
+    "supertest": "^2.0.0"
   }
 }

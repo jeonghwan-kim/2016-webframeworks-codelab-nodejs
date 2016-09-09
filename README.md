@@ -68,7 +68,7 @@ curl -X PUT 'localhost:3000/users/1' -d "name=chris2" -v
 코드가 넘넘 길어 졌다. 정리하고 넘어가자.
 
 모듈이란?
-
+모듈의 사용법에 대한 모든 경우를 보여주자
 ...
 
 User APIs를 모듈로 만들자.
@@ -79,14 +79,25 @@ User APIs를 모듈로 만들자.
 express.Router();
 
 이것이 리펙토링 노하우!
-1차 리펙톨링: api/users/index.js
-1차 리펙토링: api/users/user.controller.js
-
-
+1차 리펙토링: api/users/index.js
+2차 리펙토링: api/users/user.controller.js
 
 
 ## Test
 
+
+### mocha
+
+npm install mocha --save-dev
+
+mocha로 hello world
+describe과 it
+
+
+### supertest
+
+
+### should
 
 
 ## Database
