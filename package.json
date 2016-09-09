@@ -1,0 +1,11 @@
+{
+  "name": "2016-webframeworks-codelab-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "author": "",
+  "license": "ISC"
+}
