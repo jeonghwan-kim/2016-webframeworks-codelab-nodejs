@@ -96,11 +96,33 @@ describe과 it
 
 ### supertest
 
+npm i supertest --save-dev
+
 
 ### should
 
+should를 사용하는 이유
+https://github.com/shouldjs/should.js
+
+npm i should --save-dev
+
+
 
 ## Database
+
+mysql, sequelize
+
+로컬에 데이터베이스를 구동하자.
+mysql.server start
+
+npm i sequelize mysql --save
+
+디비를 컨트롤러에 붙이자. 
+
+
+
+
+
 
 
 ## Image upload
