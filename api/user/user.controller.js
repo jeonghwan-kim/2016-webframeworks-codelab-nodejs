@@ -1,6 +1,3 @@
-const express = require('express');
-const router = express.Router();
-
 // Database Mockup
 let users = [
   {
@@ -17,7 +14,7 @@ let users = [
   }
 ]
 
-router.get('/:id', (req, res) => {
+exports.show = (req, res) => {
   const id = parseInt(req.params.id, 10);
   if (!id) return res.status(400).json({error: 'Incorrect id'});
 
@@ -25,13 +22,13 @@ router.get('/:id', (req, res) => {
   if (!user) return res.status(404).json({error: 'Unknown user'});
 
   return res.json(user);
-});
+};
 
-router.get('/', (req, res) => {
+exports.index = (req, res) => {
   res.json(users)
-});
+};
 
-router.delete('/:id', (req, res) => {
+exports.destroy = (req, res) => {
   const id = parseInt(req.params.id, 10);
   if (!id) return res.status(400).json({error: 'Incorrect id'});
 
@@ -42,9 +39,9 @@ router.delete('/:id', (req, res) => {
 
   users.splice(userIdx, 1);
   res.status(204).send();
-});
+};
 
-router.post('/', (req, res) => {
+exports.create = (req, res) => {
   const name = req.body.name || '';
   if (!name.length) {
     return res.status(400).json({error: 'Incorrenct name'});
@@ -62,9 +59,9 @@ router.post('/', (req, res) => {
   users.push(newUser);
 
   return res.status(201).json(newUser);
-});
+};
 
-router.put('/:id', (req, res) => {
+exports.update = (req, res) => {
   const id = parseInt(req.params.id, 10);
   if (!id) return res.status(400).json({error: 'Incorrect id'});
 
@@ -80,6 +77,4 @@ router.put('/:id', (req, res) => {
 
   user.name = name;
   return res.json(user);
-})
-
-module.exports = router;
+};
