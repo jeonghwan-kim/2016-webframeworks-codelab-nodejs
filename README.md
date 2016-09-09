@@ -3,9 +3,10 @@ NodeJS로 API 서버 만들기
 
 만들어볼 것
 
-* 회원가입 API /users, Send email
-* 로그인 API /auth
-* 이미지 업로드 API /images
+* [x] 회원가입 API /users
+* [ ] 로그인 API /auth
+* [ ] 이미지 업로드 API /images
+* [ ] email sending
 
 
 ## Hello world by NodeJS
@@ -131,11 +132,20 @@ npm i sequelize mysql --save
 NODE_ENV=test 사용
 
 
+## 폴더정리
 
+한번더 리팩토링
 
+/app: 서버 기능
+  /api: api 로직을 담당
+  /config: 서버가 구동하기 위한 환경 변수 정의 (상수)
+  /models: 데이터베이스 모델링
+/bin: 서버 구동을 위한 코드
+  /www.js: 서버 구동
+  /sync-database: 디비 싱크
 
 
 
 ## Image upload
 
-##  
+##
