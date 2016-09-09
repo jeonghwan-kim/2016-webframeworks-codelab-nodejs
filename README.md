@@ -25,6 +25,12 @@ ECMAScript 2015: const, arrow function
 
 npm install epxress --save
 
+## REST Api
+
+rest api란 무엇인고?
+
+REST Api 설계 사례 (twitter, facebook, 4sq)
+
 
 ## User APIs
 
@@ -57,13 +63,26 @@ curl -X PUT 'localhost:3000/users/1' -d "name=chris2" -v
 
 ## Routing
 
-REST Api 란?
-REST Api 설계 사례 (twitter, facebook, 4sq)
+### Module
+
+코드가 넘넘 길어 졌다. 정리하고 넘어가자.
+
+모듈이란?
+
+...
+
+User APIs를 모듈로 만들자.
 
 
-curl -X -v
+### Router in Express
 
 express.Router();
+
+이것이 리펙토링 노하우!
+1차 리펙톨링: api/users/index.js
+1차 리펙토링: api/users/user.controller.js
+
+
 
 
 ## Test
