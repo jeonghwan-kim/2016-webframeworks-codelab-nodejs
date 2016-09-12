@@ -13,12 +13,8 @@ NodeJS로 API 서버 만들기
 
 ## Hello world by NodeJS
 
-
 ## Express
 
-익스프레스를 사용하는 이유?
-
-npm install epxress --save
 
 
 ## REST Api
