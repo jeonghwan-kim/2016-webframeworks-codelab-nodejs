@@ -9,15 +9,9 @@ NodeJS로 API 서버 만들기
 * [ ] email sending
 
 
+## Nodejs에 대해
+
 ## Hello world by NodeJS
-
-npm init
-
-copy hello world
-
-curl -X GET 'localhost:3000'
-
-ECMAScript 2015: const, arrow function
 
 
 ## Express
@@ -25,6 +19,7 @@ ECMAScript 2015: const, arrow function
 익스프레스를 사용하는 이유?
 
 npm install epxress --save
+
 
 ## REST Api
 
