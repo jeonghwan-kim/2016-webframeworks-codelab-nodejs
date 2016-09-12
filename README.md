@@ -15,14 +15,7 @@ NodeJS로 API 서버 만들기
 
 ## Express
 
-
-
 ## REST Api
-
-rest api란 무엇인고?
-
-REST Api 설계 사례 (twitter, facebook, 4sq)
-
 
 ## User APIs
 
