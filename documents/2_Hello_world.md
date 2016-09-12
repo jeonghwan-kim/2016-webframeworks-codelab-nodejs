@@ -90,7 +90,7 @@ Server running at http://127.0.0.1:3000/
 
 크롬 브라우져을 열어 http://127.0.0.1:3000  주소로 접속해 보세요.
 
-![](./result.png)
+![](./imgs/result.png)
 
 Hello world 문자열이 브라우져에 출력되었습니다.
 
