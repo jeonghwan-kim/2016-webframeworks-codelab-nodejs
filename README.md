@@ -10,23 +10,12 @@ NodeJS로 API 서버 만들기
 
 
 ## Nodejs에 대해
-
 ## Hello world by NodeJS
-
 ## Express
-
 ## REST Api
-
 ## User APIs
-
 ### GET /users
-
-curl -X GET 'localhost:3000/users' -v
-
-
 ### GET /users/:id
-
-curl -X GET 'localhost:3000/users/1' -v
 
 
 ### DELETE /users/:id
