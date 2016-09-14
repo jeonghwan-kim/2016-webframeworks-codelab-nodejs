@@ -18,11 +18,3 @@ API를 만들어 봅시다. 대부분의 서비스는 이용하는 사용자가 
 * POST /users
 * DELETE /users/:id
 * PUT /users/:id
-
-## GET /users
-
-사용자 데이터를 조회하는 API 입니다. 기존의 Hello world 코드를 수정하여 만들어 볼까요?
-
-```javascript
-
-```
