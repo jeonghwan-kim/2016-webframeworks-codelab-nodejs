@@ -89,3 +89,56 @@ app.delete('/users/:id', (req, res) => {
   res.status(204).send();
 });
 ```
+
+## API 테스트
+
+curl를 이용해서 삭제 api를 테스트 해보겠습니다.
+
+```
+curl -X DELETE '127.0.0.1:3000/users/1' -v
+*   Trying 127.0.0.1...
+* Connected to 127.0.0.1 (127.0.0.1) port 3000 (#0)
+> DELETE /users/1 HTTP/1.1
+> Host: 127.0.0.1:3000
+> User-Agent: curl/7.43.0
+> Accept: */*
+>
+< HTTP/1.1 204 No Content
+< X-Powered-By: Express
+< Date: Wed, 14 Sep 2016 06:48:51 GMT
+< Connection: keep-alive
+<
+* Connection #0 to host 127.0.0.1 left intact
+```
+
+204 상태 코드가 응답되었습니다. GET api와는 다르게 바디가 비어있는 채로 왔습니다. 실제 삭제 되었는지 조회 API를 호출해 보죠.
+
+```
+curl -X GET '127.0.0.1:3000/users/1' -v
+*   Trying 127.0.0.1...
+* Connected to 127.0.0.1 (127.0.0.1) port 3000 (#0)
+> GET /users/1 HTTP/1.1
+> Host: 127.0.0.1:3000
+> User-Agent: curl/7.43.0
+> Accept: */*
+>
+< HTTP/1.1 404 Not Found
+< X-Powered-By: Express
+< Content-Type: application/json; charset=utf-8
+< Content-Length: 24
+< ETag: W/"18-4jVflJv5bJNWyjxLQo1wGQ"
+< Date: Wed, 14 Sep 2016 06:50:08 GMT
+< Connection: keep-alive
+<
+* Connection #0 to host 127.0.0.1 left intact
+{"error":"Unknown user"}%
+```
+
+id가 1인 유저를 조회했을 때 404 상태코드가 응답되었습니다. 그리고 바디에는 애러 메세지 객체가 포함되어 있군요. 전체 데이터를 조회해 볼까요?
+
+```
+curl -X GET '127.0.0.1:3000/users' -v
+[{"id":2,"name":"tim"},{"id":3,"name":"daniel"}]%
+```
+
+id가 1인 데이터는 안보이네요. 삭제 api가 제대로 동작하는것을 확인했습니다.

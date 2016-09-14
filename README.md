@@ -16,8 +16,6 @@ NodeJS로 API 서버 만들기
 ## User APIs
 ### GET /users
 ### GET /users/:id
-
-
 ### DELETE /users/:id
 
 curl -X DELETE 'localhost:3000/users/2' -v

@@ -152,7 +152,7 @@ app.get('/users/:id', (req, res) => {
 });
 ```
 
-## 응답 
+## 응답
 
 여기까지 왔다면 찾은 user 객체를 클라이언트에게 json형식으로 응답하는 것만 남았습니다. 아래는 GET /users/:id api에 대한 전체 코드입니다. 한번 쭉 읽어보세요.
 
@@ -167,3 +167,30 @@ app.get('/users/:id', (req, res) => {
   return res.json(user);
 });
 ```
+
+## API 테스트
+
+curl을 이용해 API 테스트를 진행해 봅시다.
+
+```
+curl -X GET '127.0.0.1:3000/users/1' -v
+*   Trying 127.0.0.1...
+* Connected to 127.0.0.1 (127.0.0.1) port 3000 (#0)
+> GET /users/1 HTTP/1.1
+> Host: 127.0.0.1:3000
+> User-Agent: curl/7.43.0
+> Accept: */*
+>
+< HTTP/1.1 200 OK
+< X-Powered-By: Express
+< Content-Type: application/json; charset=utf-8
+< Content-Length: 23
+< ETag: W/"17-I7acqn1l5gkxSQFaJfegnw"
+< Date: Wed, 14 Sep 2016 06:52:25 GMT
+< Connection: keep-alive
+<
+* Connection #0 to host 127.0.0.1 left intact
+{"id":1,"name":"chris"}%
+```
+
+이번에는 전체 배열이 응답되는 대신에 하나의 객체만 응답되었죠? 그리고 그 객체의 id는 1인것을 보니 요청한 데이터가 제대로 응답되는 것 같습니다. 
