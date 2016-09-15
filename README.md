@@ -17,67 +17,17 @@ NodeJS로 API 서버 만들기
 ### GET /users
 ### GET /users/:id
 ### DELETE /users/:id
-
-curl -X DELETE 'localhost:3000/users/2' -v
-
-
 ### POST /users
 
-npm i body-parser --save
-
-curl -X POST 'localhost:3000/user/2' -d "name="bek" -v
-
-
-### PUT /users/:id
-
+### PUT /users/:id (skip)
 curl -X PUT 'localhost:3000/users/1' -d "name=chris2" -v
 
-
-## Routing
-
-### Module
-
-코드가 넘넘 길어 졌다. 정리하고 넘어가자.
-
-모듈이란?
-모듈의 사용법에 대한 모든 경우를 보여주자
-...
-
-User APIs를 모듈로 만들자.
-
-
-### Router in Express
-
-express.Router();
-
-이것이 리펙토링 노하우!
-1차 리펙토링: api/users/index.js
-2차 리펙토링: api/users/user.controller.js
-
+## Router
 
 ## Test
-
-
 ### mocha
-
-npm install mocha --save-dev
-
-mocha로 hello world
-describe과 it
-
-
 ### supertest
-
-npm i supertest --save-dev
-
-
 ### should
-
-should를 사용하는 이유
-https://github.com/shouldjs/should.js
-
-npm i should --save-dev
-
 
 
 ## Database
