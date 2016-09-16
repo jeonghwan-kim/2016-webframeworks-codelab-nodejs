@@ -76,8 +76,55 @@ exports.destroy = (req, res) => {
 };
 ```
 
+---
+아래부터는 스킵 
+
 ## Update
 
-마지막 남은 것인 update 기능인데요 이것은 좀 특별하게 하려고 뒤로 미루었습니다. 테스트 코드를 먼저 작성하고 컨트롤러 함수를 만들것입니다. 잘 보세요. 이렇게 코딩하는 방법을 tdd 개발방법론이라고 한답니다.
+마지막 남은 것인 update 기능인데요 이것은 좀 특별하게 하려고 뒤로 미루었습니다. 테스트 코드를 먼저 작성하고 컨트롤러 함수를 만들것입니다. 잘 보세요. 이렇게 코딩하는 방법을 tdd 개발방법론이라고 한답니다. 테스트 코드를 api/user/user.spec.js에 추가해 볼께요
 
-...
+```javascript
+describe('PUT /users/:id', () => {
+  it.only('should return 200 status code', (done) => {
+    request(app)
+        .put('/users/1')
+        .send({
+          name: 'foo'
+        })
+        .end((err, res) => {
+          if (err) throw err;
+          done();
+        });
+  });
+});
+```
+
+업데이트 api를 호출하면 200 상태 코드가 응답되는지 체크하는 코드입니다. 테스트를 돌려보면 당연히 실패가 나오겠죠?
+
+```
+npm test
+.. 실패화면 ...
+```
+
+404 에러 메세지가 나오네요. 라우팅 설정을 하지 않았기 때문이죠. 그럼 이 테스트를 통과할수 있도록 코드를 추가해 보겠습니다. 먼저 api/user/index.js 파일에 해당 api에 대한 라우팅 설정을 추가합니다.
+
+```javascript
+router.put('/:id', controller.update);
+```
+
+PUT /users/:id 로 요청이 들어올 경우 update 컨트롤러 함수가 동작하도록 설정했습니다. api/user/user.controller.js 파일로 이동하고 update 함수를 정의합니다.
+
+```javascript
+exports.update = (req, res) => {
+  res.send();
+}
+```
+
+update() 함수에서는 요청이 들어오면 send() 함수를 이용해 200 상태코드만 응답하도록 변경하였습니다. 그리고나서 다시 테스트를 돌려보면 테스트에 통과합니다.
+
+```
+npm test
+... 성공 ...
+```
+
+put api 에 200 성공코드가 응답괴었습니다.
