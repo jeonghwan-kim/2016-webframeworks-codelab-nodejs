@@ -68,24 +68,6 @@ app.post('/users', (req, res) => {
   return res.status(201).json(newUser);
 });
 
-app.put('/users/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  if (!id) return res.status(400).json({error: 'Incorrect id'});
-
-  const name = req.body.name || '';
-  if (!name.length) {
-    return res.status(400).json({error: 'Incorrenct name'});
-  }
-
-  let user = users.filter(user => user.id === id)[0];
-  if (!user) {
-    return res.status(404).json({error: 'Unknown user'});
-  }
-
-  user.name = name;
-  return res.json(user);
-})
-
 app.listen(3000, () => {
   console.log('Example app listening on port 3000!');
 });
