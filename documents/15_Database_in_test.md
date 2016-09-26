@@ -162,3 +162,7 @@ npm test
 ```
 
 나머지 테스트 코드에서도 데이터베이스를 연결해보세요.
+
+```
+git checkout unitTestWithDb
+```

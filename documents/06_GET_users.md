@@ -81,3 +81,7 @@ curl -X GET '127.0.0.1:3000/users' -v
 ```
 
 요청한 결과 `users` 변수에 저장된 자바스크립트 객체가 JSON 형식으로 변환되어 클라이언트로 전달 되었습니다.
+
+```
+git checkout getUsers
+```

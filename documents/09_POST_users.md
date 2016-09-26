@@ -196,3 +196,8 @@ curl -X GET '127.0.0.1:3000/users/4'  -v
 ```
 
 GET 요청으로 새로만든 id가 4인 유저를 조회할 수 있습니다. 제대로 동작합니다.
+
+
+```
+git checkout postUser
+```

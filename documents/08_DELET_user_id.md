@@ -148,3 +148,7 @@ curl -X GET '127.0.0.1:3000/users' -v
 ```
 
 `id`가 1인 데이터는 안보이네요. 삭제 API가 제대로 동작하는것을 확인했습니다.
+
+```
+git checkout deleteUserById
+```

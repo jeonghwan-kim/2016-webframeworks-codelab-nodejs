@@ -140,3 +140,7 @@ npm test
 ```
 
 put api 에 200 성공코드가 응답괴었습니다.
+
+```
+git checkout sequelizeInCtrl
+```

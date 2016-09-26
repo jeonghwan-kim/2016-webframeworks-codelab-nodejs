@@ -104,6 +104,11 @@ router.post('/', (req, res) => {
 });
 ```
 
+```
+git checkout router1
+```
+
+
 ## 라우팅 컨트롤러 만들기
 
 `app.js`에서 `api/user/index.js` 로 코드를 이동하면서 코드의 가독성을 높였습니다. `app.js`에는 익스프레스 설정에 관련된 코드만 있고 `api` 폴더에는 각 리소스 별로 (여기에서는 user 뿐이지만) 라우팅 로직이 들어있기 때문입니다.
@@ -157,3 +162,7 @@ router.post('/users', controller.create);
 * app.js: 익스프레스로 서버 설정 및 구동
 * api/user/index.js: User API에 대한 라우팅 설정
 * api/user/user.controller.js: User API에 대한 실제 로직
+
+```
+git checkout router2
+```

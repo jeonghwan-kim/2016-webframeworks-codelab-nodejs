@@ -196,3 +196,10 @@ describe('GET /users', () => {
 모든 검증을 마치면 모카에게 `it()` 함수가 종료됨을 의미하는 `done()` 함수를 호출하고 테스트를 종료합니다.
 
 이것은 테스트코드의 시작에 불과합니다. 지금가지 작성한 모든 API에 대한 테스트 코드를 작성해 봅시다.
+
+```
+git checkout unitTest
+git checkout unitTest2
+git checkout unitTest3
+git checkout unitTest4
+```

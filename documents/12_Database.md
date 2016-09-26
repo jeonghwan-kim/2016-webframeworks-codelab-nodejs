@@ -1,4 +1,4 @@
-데이터베이스 연동 
+데이터베이스 연동
 ===============
 
 자 드디어 데이터베이스를 붙일 차례가 왔습니다. 벡엔드 구조에 대해 설명한 부분을 기억할수 있겠어요? 바로 이 모습.
@@ -180,3 +180,7 @@ id 값은 sequelize가 자동으로 생성한 컬럼입니다. 프라이머리 �
 name은 우리가 정의한 컬럼입니다. sequelize.STRING 값으로 정의했는데 varchar(255)로 설정된것을 확인하세요.
 
 그리고 createdAt과 updateAt도 sequelize가 자동으로 만들어준 컬럼입니다. datetime 형식으로 되어 있네요.
+
+```
+git checkout sequelizeModel
+```

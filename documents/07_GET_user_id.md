@@ -258,3 +258,7 @@ curl -X GET 'localhost:3000/users/alice' -v
 ```
 
 400 Bad Request 상태 코드와 "Incorrect id" 에러 문자열이 응답되었습니다. 모두 제대로 동작하는군요.
+
+```
+git checkout getUserById
+```
