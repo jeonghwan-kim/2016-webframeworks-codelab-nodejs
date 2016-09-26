@@ -4,14 +4,7 @@ const should = require('should');
 const app = require('../../app');
 
 describe('GET /users', () => {
-  it('should return 200 status code', (done) => {
-    request(app)
-        .get('/users')
-        .expect(200)
-        .end(done);
-  });
-
-  it('should return array', (done) => {
+  it('should return 200 status code and user array', done => {
     request(app)
         .get('/users')
         .expect(200)
@@ -22,24 +15,31 @@ describe('GET /users', () => {
             user.should.have.properties('id', 'name');
             user.id.should.be.a.Number();
             user.name.should.be.a.String();
-          })
+          });
           done();
         });
   });
 });
 
 describe('GET /users/:id', () => {
-  it('should return 200 status code', (done) => {
+  it('should return 200 status code and user object', done => {
     request(app)
         .get('/users/1')
         .expect(200)
-        .end(done);
+        .end((err, res) => {
+          if (err) throw err;
+          res.body.should.be.an.instanceof(Object)
+          res.body.should.have.properties('id', 'name');
+          res.body.id.should.be.a.Number();
+          res.body.name.should.be.a.String();
+          done();
+        });
   });
 
-  it('should return 404 status code', (done) => {
+  it('should return 400 status code on string id', (done) => {
     request(app)
-        .get('/users/4')
-        .expect(404)
+        .get('/users/abc')
+        .expect(400)
         .end((err, res) => {
           if (err) throw err;
           res.body.should.have.property('error');
@@ -47,45 +47,13 @@ describe('GET /users/:id', () => {
         });
   });
 
-  it('should return object', (done) => {
+  it('should return 404 status code on no user', (done) => {
     request(app)
-        .get('/users/1')
-        .expect(200)
+        .get('/users/4')
+        .expect(404)
         .end((err, res) => {
           if (err) throw err;
-          res.body.should.be.an.instanceof(Object)
-          res.body.should.have.properties('id', 'name');
-          res.body.id.should.be.a.Number();
-          res.body.name.should.be.a.String();
-          done();
-        });
-  });
-});
-
-describe('POST /users', () => {
-  it('should return 201 status code', (done) => {
-    request(app)
-        .post('/users')
-        .send({
-          name: 'foo'
-        })
-        .expect(201)
-        .end(done);
-  });
-
-  it('should return new user object', (done) => {
-    request(app)
-        .post('/users')
-        .send({
-          name: 'foo'
-        })
-        .expect(201)
-        .end((err, res) => {
-          if (err) throw err;
-          res.body.should.be.an.instanceof(Object)
-          res.body.should.have.properties('id', 'name');
-          res.body.id.should.be.a.Number();
-          res.body.name.should.be.a.String();
+          res.body.should.have.property('error');
           done();
         });
   });
