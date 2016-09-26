@@ -28,7 +28,13 @@ exports.destroy = (req, res) => {
     where: {
       id: id
     }
-  }).then(() => res.status(204).send());
+  }).then(count => {
+    if (!count) {
+      return res.status(404).send({error: 'No user'});
+    }
+
+    res.status(204).send();
+  });
 };
 
 exports.create = (req, res) => {
@@ -46,16 +52,22 @@ exports.update = (req, res) => {
   const id = parseInt(req.params.id, 10);
   if (!id) return res.status(400).json({error: 'Incorrect id'});
 
-  const name = req.body.name || '';
-  if (!name.length) {
-    return res.status(400).json({error: 'Incorrenct name'});
-  }
+  models.User.findOne({
+    where: {
+      id: id
+    }
+  }).then(user => {
+    if (!user) {
+      return res.status(404).json({error: 'No user'});
+    }
 
-  let user = users.filter(user => user.id === id)[0];
-  if (!user) {
-    return res.status(404).json({error: 'Unknown user'});
-  }
+    let name = req.body.name || '';
+    name = name.toString().trim();
+    if (!name.length) {
+      return res.status(400).json({error: 'Incorrenct name'});
+    }
 
-  user.name = name;
-  return res.json(user);
+    user.name = name;
+    user.save().then(_ => res.json(user))  ;
+  });
 };

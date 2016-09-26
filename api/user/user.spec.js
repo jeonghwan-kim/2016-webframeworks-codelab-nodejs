@@ -2,9 +2,51 @@ const assert = require('assert');
 const request = require('supertest');
 const should = require('should');
 const app = require('../../app');
+const syncDb = require('../../bin/sync-db');
+const models = require('../../models');
 
 describe('GET /users', () => {
+  const users = [{name: 'Alice'}, {name: 'Bek'}, {name: 'Chris'}];
+
+  before('Sync database', done => {
+      syncDb().then(_ => done())
+  });
+
+  before('Insert seed user data', done => {
+    models.User.bulkCreate(users).then(_ => done());
+  })
+
+  after('delete seed user data', (done) => {
+    models.User.destroy({
+      where: {
+        name: {
+          in: users.map(user => user.name)
+        }
+      }
+    }).done(_ => done());
+  });
+
   it('should return 200 status code and user array', done => {
+    const users = [{name: 'Alice'}];
+
+    before('Sync database', done => {
+        syncDb().then(_ => done())
+    });
+
+    before('Insert seed user data', done => {
+      models.User.bulkCreate(users).then(_ => done());
+    })
+
+    after('delete seed user data', (done) => {
+      models.User.destroy({
+        where: {
+          name: {
+            in: users.map(user => user.name)
+          }
+        }
+      }).done(_ => done());
+    });
+
     request(app)
         .get('/users')
         .expect(200)
@@ -22,6 +64,26 @@ describe('GET /users', () => {
 });
 
 describe('GET /users/:id', () => {
+  const users = [{name: 'Alice'}];
+
+  before('Sync database', done => {
+      syncDb().then(_ => done())
+  });
+
+  before('Insert seed user data', done => {
+    models.User.bulkCreate(users).then(_ => done());
+  })
+
+  after('delete seed user data', (done) => {
+    models.User.destroy({
+      where: {
+        name: {
+          in: users.map(user => user.name)
+        }
+      }
+    }).done(_ => done());
+  });
+
   it('should return 200 status code and user object', done => {
     request(app)
         .get('/users/1')
@@ -49,7 +111,7 @@ describe('GET /users/:id', () => {
 
   it('should return 404 status code on no user', (done) => {
     request(app)
-        .get('/users/4')
+        .get('/users/2')
         .expect(404)
         .end((err, res) => {
           if (err) throw err;
@@ -60,6 +122,26 @@ describe('GET /users/:id', () => {
 });
 
 describe('DELETE /users/:id', () => {
+  const users = [{name: 'Alice'}];
+
+  beforeEach('Sync database', done => {
+      syncDb().then(_ => done())
+  });
+
+  beforeEach('Insert seed user data', done => {
+    models.User.bulkCreate(users).then(_ => done());
+  })
+
+  afterEach('delete seed user data', (done) => {
+    models.User.destroy({
+      where: {
+        name: {
+          in: users.map(user => user.name)
+        }
+      }
+    }).done(_ => done());
+  });
+
   it('should return 204 status code', done => {
     request(app)
         .delete('/users/1')
@@ -83,7 +165,7 @@ describe('DELETE /users/:id', () => {
 
   it('should return 404 status code on no user', (done) => {
     request(app)
-        .delete('/users/4')
+        .delete('/users/2')
         .expect(404)
         .end((err, res) => {
           if (err) throw err;
@@ -94,6 +176,10 @@ describe('DELETE /users/:id', () => {
 });
 
 describe('POST /users', () => {
+  before('Sync database', done => {
+      syncDb().then(_ => done())
+  });
+
   it('should return 201 status code and new user object', done => {
     const name = 'Daniel';
 
@@ -105,7 +191,7 @@ describe('POST /users', () => {
         })
         .end((err, res) => {
           if (err) throw err;
-          res.body.should.have.property('id', 4);
+          res.body.should.have.property('id', 1);
           res.body.should.have.property('name', name);
           done();
         });
@@ -118,6 +204,81 @@ describe('POST /users', () => {
         .send({
           name: ' '
         })
+        .end((err, res) => {
+          if (err) throw err;
+          res.body.should.have.property('error');
+          done();
+        });
+  });
+});
+
+describe('PUT /users/:id', () => {
+  const users = [{name: 'Alice'}];
+
+  beforeEach('Sync database', done => {
+      syncDb().then(_ => done())
+  });
+
+  beforeEach('Insert seed user data', done => {
+    models.User.bulkCreate(users).then(_ => done());
+  })
+
+  afterEach('delete seed user data', (done) => {
+    models.User.destroy({
+      where: {
+        name: {
+          in: users.map(user => user.name)
+        }
+      }
+    }).done(_ => done());
+  });
+
+  it('should return 200 status code and new user object', done => {
+    const name = 'Daniel';
+
+    request(app)
+        .put('/users/1')
+        .expect(200)
+        .send({
+          name: name
+        })
+        .end((err, res) => {
+          if (err) throw err;
+          res.body.should.have.property('id', 1);
+          res.body.should.have.property('name', name);
+          done();
+        });
+  });
+
+  it('should return 400 status code on string id', (done) => {
+    request(app)
+        .put('/users/1')
+        .expect(400)
+        .end((err, res) => {
+          if (err) throw err;
+          res.body.should.have.property('error');
+          done();
+        });
+  });
+
+  it('should return 400 status code with empty name', (done) => {
+    request(app)
+        .put('/users/1')
+        .expect(400)
+        .send({
+          name: ' '
+        })
+        .end((err, res) => {
+          if (err) throw err;
+          res.body.should.have.property('error');
+          done();
+        });
+  });
+
+  it('should return 404 status code on no user', (done) => {
+    request(app)
+        .put('/users/2')
+        .expect(404)
         .end((err, res) => {
           if (err) throw err;
           res.body.should.have.property('error');

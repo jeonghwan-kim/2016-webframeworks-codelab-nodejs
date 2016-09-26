@@ -3,7 +3,9 @@ const config = require('./config/environment')
 const sequelize = new Sequelize(
     config.mysql.database,
     config.mysql.username,
-    config.mysql.password);
+    config.mysql.password, {
+      logging: config.mysql.logging
+    });
 
 const User = sequelize.define('user', {
   name: Sequelize.STRING

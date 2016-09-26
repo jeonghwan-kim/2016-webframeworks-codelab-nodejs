@@ -7,13 +7,4 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 
 app.use('/users', require('./api/user'));
 
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!');
-
-  require('./models').sequelize.sync({force: true})
-      .then(() => {
-        console.log('Databases sync');
-      });
-});
-
 module.exports = app;
