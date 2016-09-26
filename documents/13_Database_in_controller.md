@@ -88,10 +88,6 @@ exports.destroy = (req, res) => {
 };
 ```
 
-
-
-
-
 ---
 아래부터는 스킵
 
