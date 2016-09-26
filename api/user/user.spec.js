@@ -58,3 +58,37 @@ describe('GET /users/:id', () => {
         });
   });
 });
+
+describe('DELETE /users/', () => {
+  it('should return 204 status code', done => {
+    request(app)
+        .delete('/users/1')
+        .expect(204)
+        .end((err, res) => {
+          if (err) throw err;
+          done();
+        });
+  });
+
+  it('should return 400 status code on string id', (done) => {
+    request(app)
+        .delete('/users/abc')
+        .expect(400)
+        .end((err, res) => {
+          if (err) throw err;
+          res.body.should.have.property('error');
+          done();
+        });
+  });
+
+  it('should return 404 status code on no user', (done) => {
+    request(app)
+        .delete('/users/4')
+        .expect(404)
+        .end((err, res) => {
+          if (err) throw err;
+          res.body.should.have.property('error');
+          done();
+        });
+  });
+});
