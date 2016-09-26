@@ -42,7 +42,7 @@ exports.destroy = (req, res) => {
 };
 
 exports.create = (req, res) => {
-  const name = req.body.name || '';
+  const name = req.body.name.toString().trim() || '';
   if (!name.length) {
     return res.status(400).json({error: 'Incorrenct name'});
   }

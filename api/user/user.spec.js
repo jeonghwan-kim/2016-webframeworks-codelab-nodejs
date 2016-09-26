@@ -59,7 +59,7 @@ describe('GET /users/:id', () => {
   });
 });
 
-describe('DELETE /users/', () => {
+describe('DELETE /users/:id', () => {
   it('should return 204 status code', done => {
     request(app)
         .delete('/users/1')
@@ -85,6 +85,39 @@ describe('DELETE /users/', () => {
     request(app)
         .delete('/users/4')
         .expect(404)
+        .end((err, res) => {
+          if (err) throw err;
+          res.body.should.have.property('error');
+          done();
+        });
+  });
+});
+
+describe('POST /users', () => {
+  it('should return 201 status code and new user object', done => {
+    const name = 'Daniel';
+
+    request(app)
+        .post('/users')
+        .expect(201)
+        .send({
+          name: name
+        })
+        .end((err, res) => {
+          if (err) throw err;
+          res.body.should.have.property('id', 4);
+          res.body.should.have.property('name', name);
+          done();
+        });
+  });
+
+  it('should return 400 status code on string id', (done) => {
+    request(app)
+        .post('/users')
+        .expect(400)
+        .send({
+          name: ' '
+        })
         .end((err, res) => {
           if (err) throw err;
           res.body.should.have.property('error');
