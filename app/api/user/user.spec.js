@@ -1,8 +1,8 @@
 const assert = require('assert');
 const request = require('supertest');
 const should = require('should');
-const app = require('../../app');
-const syncDb = require('../../bin/sync-db');
+const app = require('../../');
+const syncDb = require('../../../bin/sync-db');
 const models = require('../../models');
 
 describe('GET /users', () => {
