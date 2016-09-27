@@ -23,7 +23,7 @@ node --version
 v6.5.0
 ```
 
-우리가 설치한 노드 버전이 v6.5.0이네요. 최신버번입니다.
+우리가 설치한 노드 버전이 v6.5.0이네요. 최신버전입니다.
 
 
 ## NPM
@@ -71,7 +71,7 @@ Npm을 이용해서 프로젝트를 관리할거라면 `package.json` 파일에 
 ```json
 {
   "scripts": {
-    "start": "node js"
+    "start": "node app.js"
   }
 }
 ```
@@ -133,7 +133,7 @@ Hello World
 여기까지 노드를 이용한 Hello world 출력하기였습니다.
 
 
-매 장마다 깃 태그를 이용해 코드를 볼수 있습니다. 이번 헬로월드 강의에 대한 코드는 helloWorld 태그를 이요하세요.
+매 장마다 깃 태그를 이용해 코드를 볼수 있습니다. 이번 헬로월드 강의에 대한 코드는 helloWorld 태그를 이용하세요.
 
 ```
 git checkout helloWorld
