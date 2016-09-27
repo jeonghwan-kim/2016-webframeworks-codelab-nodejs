@@ -48,6 +48,7 @@ npm i body-parser --save
 바디 파서는 미들웨어입니다. 따라서 `app.js`에 있는 익스프레스 객체에 이 미들웨어를 추가해서 사용할 수 있죠. 미들웨어를 추가할 때 사용하는 익스프레스 객체의 함수가 뭐라고 했는지 기억 나시나요? 바로 `use()` 함수입니다. 바디 파서를 `use()` 함수로 추가해 봅시다.
 
 ```javascript
+const bodyParser = require('body-parser')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 ```
