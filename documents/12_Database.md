@@ -84,7 +84,7 @@ MySQL 데이터베이스 안에는 테이블이 있습니다. 이 테이블 안�
 npm으로 Sequelize 를 먼저 설치해 보죠.
 
 ```
-npm i Sequelize --save
+npm i sequelize --save
 ```
 
 
@@ -93,6 +93,7 @@ npm i Sequelize --save
 모델이라는 용어를 들어 보셨나요? 서버에서 하나의 자원을 정의할 때 그것을 모델이라고 합니다. 우리는 지금까지 User 라는 자원을 사용했습니다. 이것이 User 모델입니다. 모델은 데이터베이스의 테이블과 1:1 매칭된다고 보시면 됩니다. 그러면 데이터베이스에 User 테이블이 있어야 합니다. User 테이블을 만들기 위해, 다시 말하면 User 모델을 만들기위해 Sequelize의 도움을 받아야합니다.
 
 모델을 만드는 역할을 하는 `models.js` 파일을 만들어 봅니다.
+app.js 와 동일한 디렉토리에 `models.js` 파일을 생성한 후 아래 내용을 적어줍니다.
 
 ```javascript
 const Sequelize = require('sequelize');
