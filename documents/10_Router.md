@@ -34,7 +34,7 @@ router.get('/users', (req, res) => {
 module.exports = router;
 ```
 
-익스프레스 모듈의 `Router` 클래스로 객체를 만들어 `router` 상수에 할당합니다. 그리고 `router` 객체에서 제공하는 `get()`, `delete()`, `post()` 따위의 함수로 라우팅 로직을 구현합니다. 이것은 우리가 익스프레스 객체 `app`을 이용한 것과 매우 똑같습니다. 마지막으로 `moduel.epxorts`를 이용해 노드 모듈로 만들었습니다.
+익스프레스 모듈의 `Router` 클래스로 객체를 만들어 `router` 상수에 할당합니다. 그리고 `router` 객체에서 제공하는 `get()`, `delete()`, `post()` 따위의 함수로 라우팅 로직을 구현합니다. 이것은 우리가 익스프레스 객체 `app`을 이용한 것과 매우 똑같습니다. 마지막으로 `module.exports`를 이용해 노드 모듈로 만들었습니다.
 
 
 ## User 라우팅 모듈 만들기
@@ -78,7 +78,7 @@ app.use('/users', require('./api/user'));
 
 간단하죠? 다른 미들웨어를 추가하는 것과 비슷합니다. 단 한가지 다른점은 파라매터가 두 개라는 것입니다. `use()`에서 파라매터를 두 개 사용하는 경우는 라우팅 모듈을 설정할때 그렇습니다. 위 코드의 의미는 "모든 리퀘스트중 경로가 '/users'로 시작되는 요청에 대해서는 두번째 파라매터로 오는 미들웨어가 담당하도록 한다" 입니다.
 
-그러면 다시 `api/user` 모듈로 이동해 봅시다. `/users`로 들어오 요청에 대해 이제는 경로 앞부분의 "/users"는 제외한 하위 경로로 설정해 주어야 합니다. `api/user/index.js` 파일을 변경하면 다음과 같습니다.
+그러면 다시 `api/user` 모듈로 이동해 봅시다. `/users`로 들어오는 요청에 대해 이제는 경로 앞부분의 "/users"는 제외한 하위 경로로 설정해 주어야 합니다. `api/user/index.js` 파일을 변경하면 다음과 같습니다.
 
 ```javascript
 const express = require('express');
@@ -114,8 +114,13 @@ git checkout router1
 `app.js`에서 `api/user/index.js` 로 코드를 이동하면서 코드의 가독성을 높였습니다. `app.js`에는 익스프레스 설정에 관련된 코드만 있고 `api` 폴더에는 각 리소스 별로 (여기에서는 user 뿐이지만) 라우팅 로직이 들어있기 때문입니다.
 
 하지만 여기서 만족할 순 없습니다. 한번 더 리펙토링을 하겠습니다. `api/user/user.controller.js` 파일을 만드세요.
+그리고 index.js 에서 users 배열 선언 부분을 가져옵니다.
 
 ```javascript
+let users = [
+  // ...
+];
+
 exports.index = (req, res) => {
   // ...
 };
@@ -146,13 +151,13 @@ exports.create = (req, res) => {
 ```javascript
 const controller = require('./user.controller');
 
-router.get('/users', controller.index);
+router.get('/', controller.index);
 
-router.get('/users/:id', controller.show);
+router.get('/:id', controller.show);
 
-router.delete('/users/:id', controller.destroy);
+router.delete('/:id', controller.destroy);
 
-router.post('/users', controller.create);
+router.post('/', controller.create);
 ```
 
 훨씬 간단해 졌죠?
